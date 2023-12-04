@@ -32,22 +32,22 @@ jobs:
             RHVOICE_FCACHE: true
             RHVOICE_FCACHE_LIFETIME: 1
 
-          - os: windows-2019
+          - os: windows-2022
             THREADED: 1
-          - os: windows-2019
+          - os: windows-2022
             CHUNKED_TRANSFER: true
-          - os: windows-2019
+          - os: windows-2022
             RHVOICE_DYNCACHE: true
-          - os: windows-2019
+          - os: windows-2022
             RHVOICE_FCACHE: true
-          - os: windows-2019
+          - os: windows-2022
             RHVOICE_FCACHE: true
             RHVOICE_FCACHE_LIFETIME: 1
 
     steps:
     - uses: actions/checkout@v2
     - name: Set THREADED=${{ matrix.THREADED }} on Windows
-      if: ${{ matrix.THREADED != '' && matrix.os == 'windows-2019'}}
+      if: ${{ matrix.THREADED != '' && matrix.os == 'windows-2022'}}
       run: echo "THREADED=${{ matrix.THREADED }}" >> $env:GITHUB_ENV
 
     - name: Prepare on Linux
@@ -63,7 +63,7 @@ jobs:
         docker logs rhvoice-rest
         pip install aiohttp
     - name: Prepare on Windows
-      if: ${{ matrix.os == 'windows-2019' }}
+      if: ${{ matrix.os == 'windows-2022' }}
       run: |
         pip install -q --upgrade wheel
         pip install -q -r requirements.txt
@@ -75,7 +75,7 @@ jobs:
       if: ${{ matrix.os == 'ubuntu-20.04' }}
       run: python -u example/threaded_test.py 16
     - name: Test on Windows
-      if: ${{ matrix.os == 'windows-2019' }}
+      if: ${{ matrix.os == 'windows-2022' }}
       run: |
         $MyProcess = Start-Process "python" -ArgumentList "-u","app.py" -RedirectStandardOutput "logs" -PassThru
         Start-Sleep -s 5
@@ -90,7 +90,7 @@ jobs:
         docker ps -a
     - name: Result on Windows
       continue-on-error: true
-      if: ${{ matrix.os == 'windows-2019' }}
+      if: ${{ matrix.os == 'windows-2022' }}
       run: type logs
 #      run: |
 #        Stop-Process -Id $MyProcess.Id
