@@ -5,20 +5,18 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 
-RUNTIME_PACKAGES="libao4 libasound2 libportaudio2 lame python3 python3-pip python3-setuptools locales opus-tools \
-locales-all"
-BUILD_PACKAGES="git scons python-lxml build-essential libao-dev pkg-config flite1-dev portaudio19-dev"
+RUNTIME_PACKAGES="lame python3 python3-setuptools locales opus-tools flac locales-all"
+BUILD_PACKAGES="git scons python3-pip python3-wheel python3-lxml build-essential libspeechd-dev pkg-config"
 
 apt-get update -y
 apt-get -y install --no-install-recommends "${RUNTIME_PACKAGES}" "${BUILD_PACKAGES}"
-sudo -H python3 -m pip install --upgrade pip setuptools wheel
-sudo -H python3 -m pip install flask pymorphy2 rhvoice-wrapper
+sudo -H python3 -m pip install -r requirements.txt
 
 cp app.py /opt/rhvoice-rest.py
 cp rhvoice_rest_cache.py /opt/
 chmod +x /opt/rhvoice-rest.py
 
-git clone --depth=1 --branch 1.2.3 https://github.com/Olga-Yakovleva/RHVoice.git /opt/RHVoice
+git clone --recurse-submodules --depth=1 --branch 1.14.0 https://github.com/RHVoice/RHVoice /opt/RHVoice
 cd /opt/RHVoice && scons && scons install && ldconfig
 
 git clone https://github.com/vantu5z/RHVoice-dictionary.git /opt/RHVoice-dictionary

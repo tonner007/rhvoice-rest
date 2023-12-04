@@ -66,7 +66,8 @@ jobs:
       if: ${{ matrix.os == 'windows-2019' }}
       run: |
         pip install -q --upgrade wheel
-        pip install -q MarkupSafe flask pymorphy2 pymorphy2-dicts-ru rhvoice-wrapper rhvoice-wrapper-bin aiohttp --only-binary rhvoice-wrapper-bin rhvoice-wrapper
+        pip install -q -r requirements.txt
+        pip install -q rhvoice-wrapper-bin aiohttp --only-binary rhvoice-wrapper-bin
         git clone -q --depth=1 https://github.com/vantu5z/RHVoice-dictionary
         xcopy /s /I /Q RHVoice-dictionary\tools\preprocessing rhvoice_tools
 
