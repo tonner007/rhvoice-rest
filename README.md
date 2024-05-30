@@ -1,6 +1,5 @@
 [rhvoice-rest](https://github.com/Aculeasis/rhvoice-rest)
 ============
-[![Docker Pulls](https://img.shields.io/docker/pulls/aculeasis/rhvoice-rest.svg)](https://hub.docker.com/r/aculeasis/rhvoice-rest/)
 [![Tests](https://github.com/Aculeasis/rhvoice-rest/actions/workflows/tests.yml/badge.svg)](https://github.com/Aculeasis/rhvoice-rest/actions/workflows/tests.yml)
 
 Это веб-сервис на основе flask и синтезатора речи [RHVoice](https://github.com/RHVoice/RHVoice). Благодаря REST API его легко интегрировать в качестве TTS-провайдера.
@@ -11,7 +10,7 @@ docker run -d \
   --name=rhvoice-rest \
   -p 8080:8080 \
   --restart unless-stopped \
-  aculeasis/rhvoice-rest:latest
+  ghcr.io/aculeasis/rhvoice-rest:latest
 ```
 Поддерживаемые архитектуры:
 | Architecture | Available | Tag |
